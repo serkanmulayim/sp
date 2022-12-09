@@ -13,6 +13,7 @@ import (
 	portfolio "sp/gen/portfolio"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/shopspring/decimal"
 )
@@ -260,7 +261,10 @@ func parseBalance(resp json.RawMessage) ([]DenomEntry, error) {
 }
 
 func getHttpJsonResponse(url string, desc string) (json.RawMessage, ReturnType, error) {
-	res, err := http.Get(url)
+	client := &http.Client{
+		Timeout: 5 * time.Second,
+	}
+	res, err := client.Get(url)
 	if err != nil {
 		errMsg := fmt.Sprintf("%s failed with error:%v", desc, err)
 		return nil, INTERNAL_ERROR, errors.New(errMsg)
