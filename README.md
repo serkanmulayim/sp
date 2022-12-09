@@ -1,20 +1,20 @@
-# SP Cosmos Hub Account Balance Viewer
+## SP Cosmos Hub Account Balance Viewer
 
-## add dependency
+### Add Dependency
 
 ```
 go get github.com/shopspring/decimal
 ```
 **Note:** [Goa](https://goa.design/) should be installed.
 
-### build server
-Prebuilt binary **sp** is built with MacOS. It can be rebuilt with the following. 
+### Build Server
+Prebuilt binary **sp** is built with MacOS. It can be rebuilt with the following command. 
 ```
 go build ./cmd/sp
 ```
 
-### coinhelper
-Coinhelper behaves as a database keeping coin metadata. It keeps cosmos to coingecko token mappings. Final file is cgcoins.json. It is precomputed in the repo. If desired, it can be run to refresh the coin metadata (e.g. if new coins are released). 
+### Coinhelper
+Coinhelper behaves as a database keeping coin metadatas. It keeps cosmos to coingecko token mappings. Final file is cgcoins.json. It is precomputed in the repo. If desired, it can be run to refresh the coin metadata (e.g. if new coins are released in Cosmos, or if they are recognized by CoinGecko). 
 ```
 cd coinhelper
 go build coinhelper.go
@@ -22,7 +22,7 @@ go build coinhelper.go
 cd ..
 ```
 
-### run server
+### Run Server
 ```
 ./sp
 ```
