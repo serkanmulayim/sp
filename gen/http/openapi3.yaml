@@ -1,0 +1,182 @@
+openapi: 3.0.3
+info:
+    title: SP Portfolio Calculator
+    description: This api returns the summary of the portfolio of an account
+    version: "1.0"
+servers:
+    - url: http://localhost:8080/sp
+paths:
+    /openapi.json:
+        get:
+            tags:
+                - portfolio
+            summary: Download ./gen/http/openapi.json
+            operationId: portfolio#/openapi.json
+            responses:
+                "200":
+                    description: File downloaded
+    /sp/portfolio/{account}:
+        get:
+            tags:
+                - portfolio
+            summary: portfolioSummary portfolio
+            operationId: portfolio#portfolioSummary
+            parameters:
+                - name: account
+                  in: path
+                  description: Account ID
+                  required: true
+                  schema:
+                    type: string
+                    description: Account ID
+                    example: Doloribus delectus.
+                  example: Harum fuga ipsam ut.
+            responses:
+                "200":
+                    description: OK response.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PortfolioResult'
+                            example:
+                                AccountID: Neque quidem omnis.
+                                Missing:
+                                    - Ipsam et quas.
+                                    - Voluptas dolor vero ullam soluta architecto ipsa.
+                                Portfolio:
+                                    - Amount: Qui aliquam placeat perspiciatis dolores.
+                                      Denom: Aliquid eius fuga placeat.
+                                      DenomTotal: Ea voluptatem ut ab non saepe.
+                                      Price: Doloribus ipsum nemo nostrum et.
+                                    - Amount: Qui aliquam placeat perspiciatis dolores.
+                                      Denom: Aliquid eius fuga placeat.
+                                      DenomTotal: Ea voluptatem ut ab non saepe.
+                                      Price: Doloribus ipsum nemo nostrum et.
+                                Total: Atque error quaerat dicta fugit.
+                "404":
+                    description: 'not_found: Account not found'
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/NotFound'
+                "500":
+                    description: 'internal_error: Internal error'
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/NotFound'
+components:
+    schemas:
+        Currency:
+            type: object
+            properties:
+                Amount:
+                    type: string
+                    description: Amount of the currency in the account
+                    example: Aut nihil iste.
+                Denom:
+                    type: string
+                    description: Name of the currency
+                    example: Nostrum incidunt.
+                DenomTotal:
+                    type: string
+                    description: Total value of the denomination in the portfolio
+                    example: Cum eveniet molestiae.
+                Price:
+                    type: string
+                    description: Price of the currency
+                    example: Quas nobis officiis iusto sunt omnis laboriosam.
+            description: Details of the cryptocurrency in the account
+            example:
+                Amount: Quam molestias illum.
+                Denom: Molestias nesciunt ut.
+                DenomTotal: Hic velit qui magnam mollitia deserunt.
+                Price: Error reprehenderit vero sequi nostrum quia explicabo.
+            required:
+                - Denom
+                - Price
+                - Amount
+                - DenomTotal
+        NotFound:
+            type: object
+            properties:
+                message:
+                    type: string
+                    description: Message of error
+                    example: Account cosmos1e0w5t53nrq7p66fye6c8p0ynyhf6y24l4yuxd7 not found
+            description: Account not found
+            example:
+                message: Account cosmos1e0w5t53nrq7p66fye6c8p0ynyhf6y24l4yuxd7 not found
+            required:
+                - message
+        PortfolioResult:
+            type: object
+            properties:
+                AccountID:
+                    type: string
+                    description: Account ID
+                    example: Dolor non illo.
+                Missing:
+                    type: array
+                    items:
+                        type: string
+                        example: Quia ullam quas eligendi est.
+                    description: List of tokens which could not be resolved and did not contribute to the total
+                    example:
+                        - Vel est similique.
+                        - Enim unde facere saepe doloremque expedita voluptatum.
+                Portfolio:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Currency'
+                    description: List of currency information
+                    example:
+                        - Amount: Qui aliquam placeat perspiciatis dolores.
+                          Denom: Aliquid eius fuga placeat.
+                          DenomTotal: Ea voluptatem ut ab non saepe.
+                          Price: Doloribus ipsum nemo nostrum et.
+                        - Amount: Qui aliquam placeat perspiciatis dolores.
+                          Denom: Aliquid eius fuga placeat.
+                          DenomTotal: Ea voluptatem ut ab non saepe.
+                          Price: Doloribus ipsum nemo nostrum et.
+                        - Amount: Qui aliquam placeat perspiciatis dolores.
+                          Denom: Aliquid eius fuga placeat.
+                          DenomTotal: Ea voluptatem ut ab non saepe.
+                          Price: Doloribus ipsum nemo nostrum et.
+                        - Amount: Qui aliquam placeat perspiciatis dolores.
+                          Denom: Aliquid eius fuga placeat.
+                          DenomTotal: Ea voluptatem ut ab non saepe.
+                          Price: Doloribus ipsum nemo nostrum et.
+                Total:
+                    type: string
+                    description: Total value of the portfolio in dollars
+                    example: Magnam quod est totam.
+            example:
+                AccountID: At est deleniti id.
+                Missing:
+                    - Odio placeat.
+                    - Beatae aut pariatur repudiandae eligendi.
+                    - Blanditiis id architecto facilis.
+                    - Assumenda aspernatur iure aspernatur.
+                Portfolio:
+                    - Amount: Qui aliquam placeat perspiciatis dolores.
+                      Denom: Aliquid eius fuga placeat.
+                      DenomTotal: Ea voluptatem ut ab non saepe.
+                      Price: Doloribus ipsum nemo nostrum et.
+                    - Amount: Qui aliquam placeat perspiciatis dolores.
+                      Denom: Aliquid eius fuga placeat.
+                      DenomTotal: Ea voluptatem ut ab non saepe.
+                      Price: Doloribus ipsum nemo nostrum et.
+                    - Amount: Qui aliquam placeat perspiciatis dolores.
+                      Denom: Aliquid eius fuga placeat.
+                      DenomTotal: Ea voluptatem ut ab non saepe.
+                      Price: Doloribus ipsum nemo nostrum et.
+                Total: Quis ab ut eos necessitatibus unde ipsam.
+            required:
+                - AccountID
+                - Portfolio
+                - Total
+                - Missing
+tags:
+    - name: portfolio
+      description: The portfolio service allows for accessing the portfolio summary
