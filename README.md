@@ -6,7 +6,7 @@ Cosmos Hub token price aggregator
 ```
 go get github.com/shopspring/decimal
 ```
-**Note:** goa should be installed
+**Note:** [Goa](https://goa.design/) should be installed
 
 ### build server
 Prebuilt binary **sp** is built with MacOS. It can be rebuilt with the following. 
@@ -26,4 +26,9 @@ cd ..
 ### run server
 ```
 ./sp
+```
+
+### API
+```
+http://localhost:8080/sp/portfolio/{cosmosAccountID}
 ```
