@@ -14,7 +14,7 @@ go build ./cmd/sp
 ```
 
 ### Coinhelper
-Coinhelper behaves as a database keeping coin metadatas. It keeps cosmos to coingecko token mappings. Final file is cgcoins.json. It is precomputed in the repo. If desired, it can be run to refresh the coin metadata (e.g. if new coins are released in Cosmos, or if they are recognized by CoinGecko). 
+Coinhelper behaves as a database keeping coin metadatas. It keeps cosmos to coingecko token mappings. Final file is coinmetadata.json. It is precomputed in the repo. If desired, it can be run to refresh the coin metadata (e.g. if new coins are released in Cosmos, or if they are recognized by CoinGecko). 
 ```
 cd coinhelper
 go build coinhelper.go
